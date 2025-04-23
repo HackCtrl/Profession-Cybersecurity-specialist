@@ -1,0 +1,105 @@
+# Основы работы с PowerShell
+
+## Введение
+PowerShell — это мощная оболочка командной строки и скриптовый язык, разработанный Microsoft для автоматизации задач и управления системами. В рамках курса по кибербезопасности я изучил базовые командлеты PowerShell, научился искать и запускать их, 
+а также выполнил практическую работу по управлению процессами, службами и дисками.
+
+## Основные командлеты PowerShell
+
+### 1. Запуск и проверка версии PowerShell
+- **Команда**: `$PSVersionTable.PSVersion`  
+  **Описание**: Позволяет узнать версию PowerShell.  
+  **Пример**:  
+    >>> $PSVersionTable.PSVersion
+
+2. Поиск связанных команд
+Команда: Get-Process | Get-Member | Select-Object TypeName -Unique
+Описание: Определяет типы объектов, возвращаемых командой Get-Process.
+Пример:
+    >>> Get-Process | Get-Member | Select-Object TypeName -Unique
+Команда: Get-Command -ParameterType <тип_объекта>
+Описание: Находит все командлеты, работающие с указанным типом объекта.
+Пример:
+    >>> Get-Command -ParameterType System.Diagnostics.Process
+
+3. Управление службами
+Команда: Get-CimInstance -ClassName Win32_Service | Select-Object -Property Status,Name,DisplayName | more
+Описание: Выводит постранично состояние всех служб на компьютере.
+Пример:
+    >>> Get-CimInstance -ClassName Win32_Service | Select-Object -Property Status,Name,DisplayName | more
+Команда: Get-Service -Name Spooler -RequiredServices и Get-Service -Name Spooler -DependentServices
+Описание: Определяет зависимости службы печати (Spooler).
+Пример:
+    >>> Get-Service -Name Spooler -RequiredServices
+    >>> Get-Service -Name Spooler -DependentServices
+
+4. Управление процессами
+Команда: Get-Process -Name Explorer, PowerShell
+Описание: Получает сведения о процессах Explorer и PowerShell.
+Пример:
+    >>> Get-Process -Name Explorer, PowerShell
+
+5. Работа с дисками
+Команда: Get-PSDrive
+Описание: Перечисляет все доступные диски в PowerShell.
+Пример:
+    >>> Get-PSDrive
+Команда: New-Item -Path "C:\temp" -ItemType Directory и New-PSDrive -Name "Temp" -Root "C:\temp" -PSProvider "FileSystem"
+Описание: Создает каталог C:\temp и добавляет его как диск с именем Temp.
+Пример:
+    >>> New-Item -Path "C:\temp" -ItemType Directory
+    >>> New-PSDrive -Name "Temp" -Root "C:\temp" -PSProvider "FileSystem"
+
+6. Принудительное завершение работы компьютера
+Команда: Stop-Computer -Force
+Описание: Немедленно завершает работу компьютера.
+Пример:
+    >>> Stop-Computer -Force
+
+### Практическая работа
+### Цель
+- Освоить базовые командлеты PowerShell для управления процессами, службами, дисками и выполнения системных задач.
+
+### Задание
+- Проверить версию PowerShell.
+- Найти связанные команды для работы с процессами.
+- Вывести состояние всех служб.
+- Узнать зависимости службы печати (Spooler).
+- Получить информацию о процессах Explorer и PowerShell.
+- Создать каталог C:\temp и добавить его как диск Temp.
+- Принудительно завершить работу компьютера (опционально).
+
+### Шаги выполнения
+- Проверка версии PowerShell:
+    >>> $PSVersionTable.PSVersion
+- Поиск связанных команд:
+    >>> Get-Process | Get-Member | Select-Object TypeName -Unique
+    >>> Get-Command -ParameterType System.Diagnostics.Process
+- Вывод состояния служб:
+    >>> Get-CimInstance -ClassName Win32_Service | Select-Object -Property Status,Name,DisplayName | more
+- Зависимости службы Spooler:
+    >>> Get-Service -Name Spooler -RequiredServices
+    >> Get-Service -Name Spooler -DependentServices
+- Информация о процессах:
+    >>> Get-Process -Name Explorer, PowerShell
+- Создание диска Temp:
+    >>> New-Item -Path "C:\temp" -ItemType Directory
+    >>> New-PSDrive -Name "Temp" -Root "C:\temp" -PSProvider "FileSystem"
+- Завершение работы компьютера:
+    >>> Stop-Computer -Force
+
+### Вывод и обобщение
+### Что было изучено:
+- Основные командлеты PowerShell для управления системой.
+- Методы поиска связанных команд и работы с типами объектов.
+- Управление процессами, службами и дисками.
+
+### Что было сделано:
+- Проверена версия PowerShell.
+- Найдены команды для работы с процессами.
+- Изучены зависимости службы печати.
+- Создан диск Temp в файловой системе.
+
+### Результаты:
+- Успешно выполнены все пункты задания.
+- Освоены навыки работы с PowerShell, которые будут полезны для дальнейшего изучения кибербезопасности и автоматизации задач.
